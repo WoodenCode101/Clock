@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+
+    <!-- CSS Start  -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: grid;
+            place-items: center;
+            background: #dde1e7;
+            text-align: center;
+        }
+
+        .clock {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #dde1e7;
+            height: 260px;
+            width: 260px;
+            border-radius: 50%;
+            box-shadow: -3px -3px 7px #ffffff73,
+                3px 3px 5px rgba(94, 104, 121, 0.288);
+            
+        }
+
+        .clock:before {
+            position: absolute;
+            content: '';
+            height: 230px;
+            width: 230px;
+            background-color: #dde1e7;
+            box-shadow: inset -3px -3px 7px #ffffff73,
+                inset 3px 3px 5px rgba(94, 104, 121, 0.288);
+            border-radius: 50%;
+        }
+
+        .clock:after {
+            position: absolute;
+            content: '';
+            height: 120px;
+            width: 120px;
+            background-color: #dde1e7;
+            box-shadow: -2px -2px 5px #ffffff73,
+                2px 2px 3px rgba(1, 1, 2, 0.288);
+            border-radius: 50%;
+        }
+
+        .clock .center-nut {
+            height: 15px;
+            width: 15px;
+            background: #404040;
+            z-index: 2;
+            border-radius: 50%;
+        }
+
+        .clock .center-nut2 {
+            height: 9px;
+            width: 9px;
+            background: #3498db;
+            z-index: 15;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .indicators div {
+            position:absolute;
+            width: 3px;
+            height: 7px;
+            background: #404040;
+            border-radius: 2px;
+        }
+
+        .indicators div:nth-child(1) {
+            transform: rotate(30deg) translateY(-101px);
+        }
+
+        .indicators div:nth-child(2) {
+            transform: rotate(60deg) translateY(-97px);
+        }
+
+        .indicators div:nth-child(3) {
+            transform: rotate(90deg) translateY(-93px);
+            background: #3498db;
+            height: 15px;
+        }
+
+        .indicators div:nth-child(4) {
+            transform: rotate(1200deg) translateY(-94px);
+        }
+
+        .indicators div:nth-child(5) {
+            transform: rotate(150deg) translateY(-97px);
+        }
+
+        .indicators div:nth-child(6) {
+            transform: rotate(180deg) translateY(-95px);
+            background: #3498db;
+            height: 15px;
+        }
+
+        .indicators div:nth-child(7) {
+            transform: rotate(210deg) translateY(-105px);
+        }
+
+        .indicators div:nth-child(8) {
+            transform: rotate(240deg) translateY(-109px);
+        }
+
+        .indicators div:nth-child(9) {
+            transform: rotate(270deg) translateY(-110px);
+            background: #3498db;
+            height: 15px;
+        }
+
+        .indicators div:nth-child(10) {
+            transform: rotate(300deg) translateY(-113px);
+        }
+
+        .indicators div:nth-child(11) {
+            transform: rotate(330deg) translateY(-112px);
+        }
+
+        .indicators div:nth-child(12) {
+            transform: rotate(360deg) translateY(-109px);
+            background: #3498db;
+            height: 15px;
+        }
+
+
+        .sec-hand,
+        .min-hand,
+        .hr-hand {
+            position: absolute;
+        }
+
+        .sec-hand,
+        .sec {
+            height: 180px;
+            width: 180px;
+            z-index: 6;
+        }
+
+        .min-hand,
+        .min {
+            height: 140px;
+            width: 140px;
+            z-index: 5;
+        }
+
+        .hr-hand,
+        .hr {
+            height: 110px;
+            width: 110px;
+            z-index: 4;
+        }
+
+        .sec,
+        .min,
+        .hr {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+        }
+
+        .sec::before {
+            position: absolute;
+            content: '';
+            height: 110px;
+            width: 2px;
+            border-radius: 2px;
+            background: #3498db;
+        }
+
+        .sec::after {
+            position: absolute;
+            content: '';
+            height: 30px;
+            width: 5px;
+            background: #3498db;
+            top: 105px;
+            border-radius: 5px;
+        }
+
+        .min::before {
+            position: absolute;
+            content: '';
+            width: 0px;
+            border-left: 3px solid transparent;
+            border-right: 3px solid transparent;
+            border-bottom: 60px solid #e95949;
+            top: -15px;
+        }
+
+        .min::after {
+            position: absolute;
+            content: '';
+            width: 2px;
+            top: 44px;
+            border-left: 2px solid transparent;
+            border-right: 2px solid transparent;
+            border-top: 22px solid #e95949;
+        }
+
+        .hr::before {
+            position: absolute;
+            content: '';
+            width: 0px;
+            border-left: 3px solid transparent;
+            border-right: 2px solid transparent;
+            border-bottom: 36px solid #303030;
+        }
+
+        .hr::after {
+            position: absolute;
+            content: '';
+            width: 3px;
+            top: 35px;
+            border-left: 1px solid transparent;
+            border-right: 1px solid transparent;
+            border-top: 14px solid #303030;
+        }
+
+
+        .sign{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 100px;
+            height: 40px;
+            border-radius: 5px;
+            color: aliceblue;
+            background-color:#3498db;
+            box-shadow: -2px -2px 7px #ffffff,
+                        2px 2px 5px #404040;
+
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+        }
+        .sign:hover{
+            color:#3498db;
+            background-color:transparent;
+            border: 2px solid #3498db;
+            box-shadow: -2px -2px 7px #ffffff,
+                        2px 2px 5px #404040;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HTML start -->
+    <div class="clock">
+        <div class="center-nut"></div>
+        <div class="center-nut2"></div>
+
+        <div class="indicators">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <div class="sec-hand">
+            <div class="sec"></div>
+        </div>
+        <div class="min-hand">
+            <div class="min"></div>
+        </div>
+        <div class="hr-hand">
+            <div class="hr"></div>
+        </div>
+    </div>
+
+    <p id="name"></p>
+    <!-- <div class="sign" onclick="document.getElementById('name').innerHTML = `This Clock is made by Sayeed.` >~Sayeed.</div> -->
+    <div class="sign" onclick="document.getElementById('name').innerHTML = `This Clock is made by Sayeed.`" style="cursor:pointer;">~Sayeed.</div>
+
+
+
+
+
+    <!-- JavaScript Start -->
+    <script>
+        const sec = document.querySelector(".sec");
+        const min = document.querySelector(".min");
+        const hr = document.querySelector(".hr");
+
+        setInterval(function () {
+            let time = new Date();
+            let secs = time.getSeconds() * 6;
+            let mins = time.getMinutes() * 6;
+            let hrs = time.getHours() * 30;
+
+            sec.style.transform = `rotateZ(${secs}deg)`;
+            min.style.transform = `rotateZ(${mins}deg)`;
+            hr.style.transform = `rotateZ(${hrs + (mins / 12)}deg)`;
+        })
+    </script>
+</body>
+
+</html>
